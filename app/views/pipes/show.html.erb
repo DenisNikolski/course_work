@@ -1,12 +1,14 @@
 <div id="pipes-show">
-  <h2>Pipe</h2>
+  <h2><%= @pipe.title %></h2>
   <div class="flex-container">
-    <%= image_tag('1.jpg') %>
-    <ul>
-      <li>Type:</li>
-      <li>Type:</li>
-      <li>Type:</li>
-      <li>Type:</li>
+    <%= image_tag(@pipe.img_src) %>
+    <h1><%= @pipe_descr.wall_thickness %></h1>
+    <ul class="list-group">
+      <li>
+
+      <%# @pipe_descr.diameter.each   do |item| %>
+      <!--<li class="list-item"><%#= item.diameter %></li>-->
+      <%# end %>
     </ul>
   </div>
   <%= link_to 'Buy now: 4$', '#', class: 'btn btn-success', target: '_blank' %>

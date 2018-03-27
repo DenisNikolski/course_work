@@ -1,0 +1,28 @@
+<h1>New Pipe description</h1>
+<%= form_for @pipe_descr do |f| %>
+  <% if @pipe_descr.errors.any? %>
+    <% @pipe_descr.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :pipe %>
+    <%= f.select :pipe_id, Pipe.all.collect {|x| [x.title, x.id]},
+                 {:include_blank => 'select one'}, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :diameter %></div>
+    <div><%= f.text_field :diameter, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :wall_thickness %></div>
+    <div><%= f.text_field :wall_thickness, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :price %></div>
+    <div><%= f.text_field :price, class: 'form-control' %></div>
+  </div>
+  <%= f.submit 'submit', class: 'btn btn-primary' %>
+  <%= link_to 'cancel', pipe_descrs_path, class: 'btn btn-default' %>
+
+<% end %>

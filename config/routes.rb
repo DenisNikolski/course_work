@@ -27,12 +27,27 @@ Rails.application.routes.draw do
 
   get 'pipes/show'
 
+  get 'pipe_descrs/new'
+
+  get 'pipe_descrs/create'
+
+  get 'pipe_descrs/update'
+
+  get 'pipe_descrs/edit'
+
+  get 'pipe_descrs/destroy'
+
+  get 'pipe_descrs/index'
+
+  get 'pipe_descrs/show'
+
   get 'about/index'
 
   get 'about' => 'about#index'
 
   root 'pipes#index'
 
+  resources :pipe_descrs
   resources :pipes
   resources :categories
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

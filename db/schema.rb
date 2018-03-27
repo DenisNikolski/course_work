@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20180327074548) do
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pipe_id"
   end
 
   create_table "pipes", force: :cascade do |t|
