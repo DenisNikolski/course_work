@@ -1,6 +1,7 @@
 class PipesController < ApplicationController
   def new
-    @pipe = pipe.new
+    @pipe = Pipe.new
+    @pipe_descr = Pipe_descr.new
   end
 
   def create
@@ -19,5 +20,10 @@ class PipesController < ApplicationController
   end
 
   def show
+  end
+
+  private
+  def pipe_params
+    params.require(:pipe).permit(:title, :category_id, :img_src)
   end
 end
