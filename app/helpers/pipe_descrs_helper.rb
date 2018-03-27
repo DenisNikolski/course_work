@@ -1,0 +1,2 @@
+module PipeDescrsHelper
+end
