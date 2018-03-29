@@ -2,14 +2,21 @@
   <h2><%= @pipe.title %></h2>
   <div class="flex-container">
     <%= image_tag(@pipe.img_src) %>
-    <h1><%= @pipe_descr.wall_thickness %></h1>
-    <ul class="list-group">
-      <li>
+    <section>
+    <table class = "table table-striped">
+      <tr>
+        <th>Diameter</th>
+        <th>Wall thickness</th>
+      </tr>
+      <% @pipe.pipe_descr.each do |descr| %>
+        <tr>
+          <td><%= descr.diameter %></td>
+          <td><%= descr.wall_thickness %></td>
+        </tr>
+      <% end %>
+    </table>
+    </section>
 
-      <%# @pipe_descr.diameter.each   do |item| %>
-      <!--<li class="list-item"><%#= item.diameter %></li>-->
-      <%# end %>
-    </ul>
   </div>
-  <%= link_to 'Buy now: 4$', '#', class: 'btn btn-success', target: '_blank' %>
+  <%= link_to 'Buy from '.concat(@pipe.pipe_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
 </div>

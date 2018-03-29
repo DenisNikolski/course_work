@@ -39,22 +39,30 @@ footer {
 #pipes-index {
     text-align: center;
 }
+#pipes-index .col-md-3 {
+    margin-top: 15px;
 
+}
 #pipes-index h4 {
-    padding: 5px;
+    margin-bottom: 0;
     height: 15%;
     font-size: 1em;
 }
 
 #pipes-index img {
     width: 100%;
-    height: 75%;
+    height: 70%;
     padding: 3px;
 }
 
 #pipes-index .btn {
     display: block;
-    margin-top: 10px;
+    height: 15%;
+
+}
+
+#pipes-index .row {
+    margin-bottom: 3%;
 }
 
 .sidebar {
@@ -79,8 +87,10 @@ footer {
 }
 
 #pipes-show .btn {
-    display: block;
-    width: 25%;
-    margin: 10px;
+    margin: 10px 10px 10px 15%;
     padding: 20px;
+}
+
+#pipes-show  .table-striped {
+    margin-left: 25%;
 }

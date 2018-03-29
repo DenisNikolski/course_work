@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'about#index'
 
-  root 'pipes#index'
+  root 'categories#index'
 
   resources :pipe_descrs
   resources :pipes

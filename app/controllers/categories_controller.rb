@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      flash[:notice] = 'Category created'
+      flash[:notice] = 'Category is created'
       redirect_to categories_path
     else
       render 'new'
@@ -23,6 +23,8 @@ class CategoriesController < ApplicationController
   end
 
   def index
+    @pipes = Pipe.all
+    @categories = Category.all
   end
 
   def show

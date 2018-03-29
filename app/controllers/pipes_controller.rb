@@ -7,8 +7,8 @@ class PipesController < ApplicationController
   def create
     @pipe = Pipe.new(pipe_params)
     if @pipe.save
-      flash[:notice] = 'Pipe created'
-      redirect_to pipes_path
+      flash[:notice] = 'Pipe is created'
+      redirect_to '/pipe_descrs/new'
     else
       render 'new'
     end
@@ -24,8 +24,6 @@ class PipesController < ApplicationController
   end
 
   def index
-    @pipes = Pipe.all
-    @categories = Category.all
   end
 
   def show
