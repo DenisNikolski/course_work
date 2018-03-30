@@ -39,10 +39,12 @@ footer {
 #pipes-index {
     text-align: center;
 }
+
 #pipes-index .col-md-3 {
     margin-top: 15px;
 
 }
+
 #pipes-index h4 {
     margin-bottom: 0;
     height: 15%;
@@ -87,10 +89,10 @@ footer {
 }
 
 #pipes-show .btn {
-    margin: 10px 10px 10px 15%;
+    margin: 10px 10px 10px 50%;
     padding: 20px;
 }
 
-#pipes-show  .table-striped {
+#pipes-show .table-striped {
     margin-left: 25%;
 }

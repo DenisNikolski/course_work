@@ -3,20 +3,26 @@
   <div class="flex-container">
     <%= image_tag(@pipe.img_src) %>
     <section>
-    <table class = "table table-striped">
-      <tr>
-        <th>Diameter</th>
-        <th>Wall thickness</th>
-      </tr>
-      <% @pipe.pipe_descr.each do |descr| %>
-        <tr>
-          <td><%= descr.diameter %></td>
-          <td><%= descr.wall_thickness %></td>
-        </tr>
-      <% end %>
-    </table>
-    </section>
 
+      <% if @pipe.pipe_descr.first.nil? %>
+        <h3>We are waiting for the delivery of this product</h3>
+        <p>keep in touch!</p>
+      <% else %>
+        <table class="table table-striped">
+          <tr>
+            <th>Diameter</th>
+            <th>Wall thickness</th>
+          </tr>
+          <% @pipe.pipe_descr.each do |descr| %>
+            <tr>
+              <td><%= descr.diameter %></td>
+              <td><%= descr.wall_thickness %></td>
+            </tr>
+          <% end %>
+        </table>
+        <%= link_to 'Buy from '.concat(@pipe.pipe_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
+      <% end %>
+    </section>
   </div>
-  <%= link_to 'Buy from '.concat(@pipe.pipe_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
 </div>
+<%= link_to 'Delete', pipe_path(@pipe), method: :delete, data: {confirm: 'Are you sure?'} %>

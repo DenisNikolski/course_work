@@ -1,2 +1,24 @@
-<h1>Pipes#edit</h1>
-<p>Find me in app/views/pipes/edit.html.erb</p>
+<h1>Edit Pipe</h1>
+<%= form_for @pipe do |f| %>
+  <% if @pipe.errors.any? %>
+    <% @pipe.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <div><%= f.label :title %></div>
+    <div><%= f.text_field :title, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :img_src %></div>
+    <div><%= f.text_field :img_src, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.select :category_id, Category.all.collect {|x| [x.name, x.id]},
+                 {:include_blank => 'select one'}, class: 'form-control' %>
+  </div>
+  <%= f.submit 'submit', class: 'btn btn-primary' %>
+  <%= link_to 'cancel', pipes_path, class: 'btn btn-default' %>
+
+<% end %>

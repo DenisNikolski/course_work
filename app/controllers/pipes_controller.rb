@@ -15,12 +15,21 @@ class PipesController < ApplicationController
   end
 
   def update
+    @pipe = Pipe.find(params[:id])
+    @pipe.update(pipe_params)
+    flash[:notice] = 'Pipe is updated'
+    redirect_to categories_path
   end
 
   def edit
+    @pipe = Pipe.find(params[:id])
   end
 
   def destroy
+    @pipe = Pipe.find(params[:id])
+    @pipe.destroy
+    flash[:notice] = 'Pipe is removed'
+    redirect_to categories_path
   end
 
   def index

@@ -7,8 +7,8 @@
           <% pipes_row.each do |pipe| %>
             <div class="col-md-3 col-sm-3">
               <h4><%= pipe.title %></h4>
-              <%= image_tag(pipe.img_src, alt: 'pipe')%>
-              <%= link_to 'read more', pipe.pipe_descr.first ? pipe_path(pipe) : '#', class: 'btn btn-primary' %>
+              <%= image_tag(pipe.img_src, alt: 'pipe') %>
+              <%= link_to 'read more', pipe_path(pipe), class: 'btn btn-primary' %>
             </div>
           <% end %>
         <% end %>
@@ -17,7 +17,7 @@
     <div class="col-md-4 sidebar">
       <a href="#" class="list-group-item list-group-item-action active">All</a>
       <% @categories.each do |category| %>
-        <a href="#" class="list-group-item list-group-item-action"><%= category.name %></a>
+        <%= link_to category.name, category_path(category.id), class: 'list-group-item list-group-item-action' %>
       <% end %>
     </div>
   </div>
