@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  height: MyString
+  lenght: MyString
+  weight: MyString
+  price: 9.99
+  radiator_id: 1
+
+two:
+  height: MyString
+  lenght: MyString
+  weight: MyString
+  price: 9.99
+  radiator_id: 1

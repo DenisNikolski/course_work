@@ -1,0 +1,24 @@
+<h1>Add new Radiator</h1>
+<%= form_for @radiator do |f| %>
+  <% if @radiator.errors.any? %>
+    <% @radiator.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <div><%= f.label :title %></div>
+    <div><%= f.text_field :title, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :img_src %></div>
+    <div><%= f.text_field :img_src, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.select :category_id, Category.all.collect {|x| [x.name, x.id]},
+                 {:include_blank => 'select one'}, class: 'form-control' %>
+  </div>
+  <%= f.submit 'submit', class: 'btn btn-primary' %>
+  <%= link_to 'cancel', radiators_path, class: 'btn btn-default' %>
+
+<% end %>
