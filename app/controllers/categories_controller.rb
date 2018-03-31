@@ -30,6 +30,11 @@ class CategoriesController < ApplicationController
   def show
     @categories = Category.all
     @category = Category.find(params[:id])
+    case @category.name
+    when 'Pipes'
+      @products = Pipe.all
+
+      end
   end
 
   private

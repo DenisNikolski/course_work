@@ -1,4 +1,32 @@
 Rails.application.routes.draw do
+  get 'radiator_descrs/new'
+
+  get 'radiator_descrs/create'
+
+  get 'radiator_descrs/update'
+
+  get 'radiator_descrs/edit'
+
+  get 'radiator_descrs/destroy'
+
+  get 'radiator_descrs/index'
+
+  get 'radiator_descrs/show'
+
+  get 'radiators/new'
+
+  get 'radiators/create'
+
+  get 'radiators/update'
+
+  get 'radiators/edit'
+
+  get 'radiators/destroy'
+
+  get 'radiators/index'
+
+  get 'radiators/show'
+
   get 'categories/new'
 
   get 'categories/create'
