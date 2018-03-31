@@ -1,2 +1,29 @@
-<h1>Radiators#show</h1>
-<p>Find me in app/views/radiators/show.html.erb</p>
+<div id="pipes-show">
+  <h2><%= @radiator.title %></h2>
+  <div class="flex-container">
+    <%= image_tag(@radiator.img_src) %>
+    <section>
+      <% if @radiator.radiator_descr.first.nil? %>
+        <h3>We are waiting for the delivery of this product</h3>
+        <p>keep in touch!</p>
+      <% else %>
+        <table class="table table-striped">
+          <tr>
+            <th>Height</th>
+            <th>Length</th>
+            <th>Weight</th>
+          </tr>
+          <% @radiator.radiator_descr.each do |descr| %>
+            <tr>
+              <td><%= descr.height %></td>
+              <td><%= descr.length %></td>
+              <td><%= descr.weight %></td>
+            </tr>
+          <% end %>
+        </table>
+        <%= link_to 'Buy from '.concat(@radiator.radiator_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
+      <% end %>
+    </section>
+  </div>
+</div>
+<%= link_to 'Delete', radiator_path(@radiator), method: :delete, data: {confirm: 'Are you sure?'} %>

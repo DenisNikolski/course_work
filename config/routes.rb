@@ -75,8 +75,10 @@ Rails.application.routes.draw do
 
   root 'categories#index'
 
-  resources :pipe_descrs
   resources :pipes
+  resources :pipe_descrs
+  resources :radiators
+  resources :radiator_descrs
   resources :categories
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

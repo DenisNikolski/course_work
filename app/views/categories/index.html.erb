@@ -12,6 +12,15 @@
             </div>
           <% end %>
         <% end %>
+        <% @radiators.each_slice(4) do |radiators_row| %>
+          <% radiators_row.each do |radiator| %>
+            <div class="col-md-3 col-sm-3">
+              <h4><%= radiator.title %></h4>
+              <%= image_tag(radiator.img_src, alt: 'pipe') %>
+              <%= link_to 'read more', radiator_path(radiator), class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-4 sidebar">

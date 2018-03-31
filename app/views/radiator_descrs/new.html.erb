@@ -1,2 +1,32 @@
-<h1>RadiatorDescrs#new</h1>
-<p>Find me in app/views/radiator_descrs/new.html.erb</p>
+<h1>New Radiator description</h1>
+<%= form_for @radiator_descr do |f| %>
+  <% if @radiator_descr.errors.any? %>
+    <% @radiator_descr.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :radiator %>
+    <%= f.select :radiator_id, Radiator.all.collect {|x| [x.title, x.id]},
+                 {:include_blank => 'select one'}, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :height %></div>
+    <div><%= f.text_field :height, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :length %></div>
+    <div><%= f.text_field :length, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :weight %></div>
+    <div><%= f.text_field :weight, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :price %></div>
+    <div><%= f.text_field :price, class: 'form-control' %></div>
+  </div>
+  <%= f.submit 'submit', class: 'btn btn-primary' %>
+  <%= link_to 'cancel', radiator_descrs_path, class: 'btn btn-default' %>
+
+<% end %>

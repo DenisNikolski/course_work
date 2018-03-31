@@ -24,22 +24,28 @@ class CategoriesController < ApplicationController
 
   def index
     @pipes = Pipe.all
+    @radiators = Radiator.all
     @categories = Category.all
   end
 
   def show
     @categories = Category.all
     @category = Category.find(params[:id])
-    case @category.name
-    when 'Pipes'
-      @products = Pipe.all
-
-      end
+    @products = case @category.name
+                  when 'Pipes'
+                    Pipe.all
+                  when 'Radiators'
+                    Radiator.all
+                  when 'Valves'
+                    Valve.all
+                  else
+                    '#'
+                end
   end
 
   private
 
   def category_params
-    params.require(:category).permit(:name)
+    params.require(:category_id).permit(:name)
   end
 end
