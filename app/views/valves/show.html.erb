@@ -1,2 +1,58 @@
-<h1>Valves#show</h1>
-<p>Find me in app/views/valves/show.html.erb</p>
+<div id="show">
+  <h2><%= @valve.title %></h2>
+  <div class="flex-container">
+    <%= image_tag(@valve.img_src) %>
+    <section>
+      <% if admin_signed_in? %>
+        <% if @valve.valve_descrs.first.nil? %>
+          <p>No product items</p>
+          <%= link_to 'new product item', new_valve_descr_path, class: 'btn btn-secondary' %>
+        <% else %>
+          <table class="table table-striped">
+            <tr>
+              <th>Radius</th>
+              <th>Pressure</th>
+              <th>Max temperature</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+            <% @valve.valve_descrs.each do |descr| %>
+              <tr>
+                <td><%= descr.radius %></td>
+                <td><%= descr.pressure %></td>
+                <td><%= descr.max_temperature %></td>
+                <td><%= link_to 'Edit', edit_valve_descr_path(descr), class: 'btn btn-warning' %>
+                <td><%= link_to 'Delete', valve_descr_path(descr), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
+              </tr>
+            <% end %>
+          </table>
+          </section>
+          </div>
+        <% end %>
+        <div class="flex-container">
+          <%= link_to 'Edit', edit_valf_path(@valve), class: 'btn btn-warning' %>
+          <%= link_to 'Delete', valf_path(@valve), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+        </div>
+      <% else %>
+        <% if @valve.valve_descrs.first.nil? %>
+          <h3>We are waiting for the delivery of this product</h3>
+          <p>keep in touch!</p>
+        <% else %>
+          <table class="table table-striped">
+            <tr>
+              <th>Radius</th>
+              <th>Pressure</th>
+              <th>Max temperature</th>
+            </tr>
+            <% @valve.valve_descrs.each do |descr| %>
+              <tr>
+                <td><%= descr.radius %></td>
+                <td><%= descr.pressure %></td>
+                <td><%= descr.max_temperature %></td>
+              </tr>
+            <% end %>
+          </table>
+          <%= link_to 'Buy from '.concat(@valve.valve_descrs.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
+        <% end %>
+        </div>
+      <% end %>

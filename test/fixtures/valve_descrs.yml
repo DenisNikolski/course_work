@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  radius: 1.5
+  pressure: 1.5
+  max_temperature: 1.5
+  valve_id: 1
+  price: 1.5
+
+two:
+  radius: 1.5
+  pressure: 1.5
+  max_temperature: 1.5
+  valve_id: 1
+  price: 1.5

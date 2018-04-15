@@ -2,10 +2,10 @@
 
 one:
   title: MyString
-  category: 1
+  category_id: 1
   img_src: MyString
 
 two:
   title: MyString
-  category: 1
+  category_id: 1
   img_src: MyString

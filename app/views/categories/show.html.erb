@@ -1,4 +1,4 @@
-<div id="pipes-index">
+<div id="index">
   <h1><%= @category.name %></h1>
   <div class="row">
     <div class="col-md-8">
@@ -14,7 +14,7 @@
               <% when 'Radiators' %>
                 <%= link_to 'read more', radiator_path(product), class: 'btn btn-primary' %>
               <% when 'Valves' %>
-                <%= link_to 'read more', valve_path(product), class: 'btn btn-primary' %>
+                <%= link_to 'read more', valf_path(product), class: 'btn btn-primary' %>
               <% else %>
                 <%= link_to 'read more', '#', class: 'btn btn-primary' %>
               <% end %>

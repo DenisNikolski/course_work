@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :valves
+  resources :valve_descrs
   resources :pipes
   resources :pipe_descrs
   resources :radiators
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     resources :valves
+    resources :valve_descrs
     resources :pipes
     resources :pipe_descrs
     resources :radiators

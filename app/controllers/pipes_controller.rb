@@ -1,6 +1,7 @@
 class PipesController < ApplicationController
   def new
     if admin_signed_in?
+      @category_id = Category.find_by_name('Pipes').id
       @pipe = Pipe.new
       @pipe_descr = PipeDescr.new
     else

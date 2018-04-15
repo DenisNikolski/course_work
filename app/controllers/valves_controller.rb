@@ -1,6 +1,7 @@
 class ValvesController < ApplicationController
   def new
     if admin_signed_in?
+      @category_id = Category.find_by_name('Valves').id
       @valve = Valve.new
       @valve_descr = ValveDescr.new
     else
@@ -21,9 +22,9 @@ class ValvesController < ApplicationController
 
   def update
     @valve = Valve.find(params[:id])
-    @valve.update(pipe_params)
+    @valve.update(valve_params)
     flash[:notice] = 'Valve is updated'
-    redirect_to valve_path(@valve)
+    redirect_to valf_path(@valve)
 
   end
 

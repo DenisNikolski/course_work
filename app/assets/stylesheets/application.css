@@ -36,45 +36,39 @@ footer {
     color: #007bff;
 }
 
-#pipes-index {
+#index {
     text-align: center;
 }
 
-#pipes-index .col-md-3 {
+#index .col-md-3 {
     margin-top: 15px;
 
 }
 
-#pipes-index h4 {
+#index h4 {
     margin-bottom: 0;
     height: 15%;
     font-size: 1em;
 }
 
-#pipes-index img {
+#index img {
     width: 100%;
     height: 70%;
     padding: 3px;
 }
 
-#pipes-index .btn {
+#index .btn {
     display: block;
     height: 15%;
 
 }
 
-#pipes-index .row {
+#index .row {
     margin-bottom: 3%;
 }
 
 .sidebar {
     padding: 20px;
-}
-
-#pipes-show h2 {
-    border-radius: 15px;
-    background: #f4f4f4;
-    padding: 10px;
 }
 
 .flex-container {
@@ -88,11 +82,22 @@ footer {
     padding: 20px;
 }
 
-#pipes-show .btn-success {
+#show h2 {
+    border-radius: 15px;
+    background: #f4f4f4;
+    padding: 10px;
+}
+
+#show img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+#show .btn-success {
     margin: 10px 10px 10px 50%;
     padding: 20px;
 }
 
-#pipes-show .table-striped {
+#show .table-striped {
     margin-left: 25%;
 }

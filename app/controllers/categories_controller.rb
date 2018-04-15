@@ -1,6 +1,11 @@
 class CategoriesController < ApplicationController
   def new
-    @category = Category.new
+    if admin_signed_in?
+      @category = Category.new
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
   end
 
   def create
@@ -25,6 +30,7 @@ class CategoriesController < ApplicationController
   def index
     @pipes = Pipe.all
     @radiators = Radiator.all
+    @valves = Valve.all
     @categories = Category.all
   end
 
@@ -32,14 +38,14 @@ class CategoriesController < ApplicationController
     @categories = Category.all
     @category = Category.find(params[:id])
     @products = case @category.name
-                  when 'Pipes'
-                    Pipe.all
-                  when 'Radiators'
-                    Radiator.all
-                  when 'Valves'
-                    Valve.all
-                  else
-                    '#'
+                when 'Pipes'
+                  Pipe.all
+                when 'Radiators'
+                  Radiator.all
+                when 'Valves'
+                  Valve.all
+                else
+                  '#'
                 end
   end
 

@@ -1,4 +1,4 @@
-<div id="pipes-show">
+<div id="show">
   <h2><%= @pipe.title %></h2>
   <div class="flex-container">
     <%= image_tag(@pipe.img_src) %>
@@ -26,11 +26,11 @@
           </table>
           </section>
           </div>
-          <div class="flex-container">
-            <%= link_to 'Edit', edit_pipe_path(@pipe), class: 'btn btn-warning' %>
-            <%= link_to 'Delete', pipe_path(@pipe), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
-          </div>
         <% end %>
+        <div class="flex-container">
+          <%= link_to 'Edit', edit_pipe_path(@pipe), class: 'btn btn-warning' %>
+          <%= link_to 'Delete', pipe_path(@pipe), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+        </div>
       <% else %>
         <% if @pipe.pipe_descr.first.nil? %>
           <h3>We are waiting for the delivery of this product</h3>

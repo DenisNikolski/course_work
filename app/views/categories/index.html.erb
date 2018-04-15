@@ -1,4 +1,4 @@
-<div id="pipes-index">
+<div id="index">
   <h1>Our products</h1>
   <div class="row">
     <div class="col-md-8">
@@ -16,8 +16,17 @@
           <% radiators_row.each do |radiator| %>
             <div class="col-md-3 col-sm-3">
               <h4><%= radiator.title %></h4>
-              <%= image_tag(radiator.img_src, alt: 'pipe') %>
+              <%= image_tag(radiator.img_src, alt: 'radiator') %>
               <%= link_to 'read more', radiator_path(radiator), class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        <% end %>
+        <% @valves.each_slice(4) do |valves_row| %>
+          <% valves_row.each do |valve| %>
+            <div class="col-md-3 col-sm-3">
+              <h4><%= valve.title %></h4>
+              <%= image_tag(valve.img_src, alt: 'valve') %>
+              <%= link_to 'read more', valf_path(valve), class: 'btn btn-primary' %>
             </div>
           <% end %>
         <% end %>

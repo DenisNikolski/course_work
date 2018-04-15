@@ -1,6 +1,7 @@
 class RadiatorsController < ApplicationController
   def new
     if admin_signed_in?
+      @category_id = Category.find_by_name('Radiators').id
       @radiator = Radiator.new
       @radiator_descr = RadiatorDescr.new
     else

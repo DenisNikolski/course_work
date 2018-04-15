@@ -1,0 +1,31 @@
+<h1>Edit Valve item</h1>
+<%= form_for @valve_descr do |f| %>
+  <% if @valve_descr.errors.any? %>
+    <% @valve_descr.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <div><%= f.label :valve_id %></div>
+    <div><%= f.text_field :valve_id, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :radius %></div>
+    <div><%= f.text_field :radius, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :pressure %></div>
+    <div><%= f.text_field :pressure, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :max_temperature %></div>
+    <div><%= f.text_field :max_temperature, class: 'form-control' %></div>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :price %></div>
+    <div><%= f.text_field :price, class: 'form-control' %></div>
+  </div>
+  <%= f.submit 'submit', class: 'btn btn-primary' %>
+  <%= link_to 'cancel', valf_path(@valve_descr.valve_id), class: 'btn btn-default' %>
+
+<% end %>

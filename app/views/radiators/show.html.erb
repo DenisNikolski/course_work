@@ -1,4 +1,4 @@
-<div id="pipes-show">
+<div id="show">
   <h2><%= @radiator.title %></h2>
   <div class="flex-container">
     <%= image_tag(@radiator.img_src) %>
@@ -28,11 +28,11 @@
           </table>
           </section>
           </div>
-          <div class="flex-container">
-            <%= link_to 'Edit', edit_radiator_path(@radiator), class: 'btn btn-warning' %>
-            <%= link_to 'Delete', radiator_path(@radiator), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
-          </div>
         <% end %>
+        <div class="flex-container">
+          <%= link_to 'Edit', edit_radiator_path(@radiator), class: 'btn btn-warning' %>
+          <%= link_to 'Delete', radiator_path(@radiator), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+        </div>
       <% else %>
         <% if @radiator.radiator_descr.first.nil? %>
           <h3>We are waiting for the delivery of this product</h3>
