@@ -1,0 +1,24 @@
+<h2>Sign up</h2>
+
+<%= form_for @admin, :url => {:action => 'create_admin'} do |f| %>
+  <% if @admin.errors.any? %>
+    <% @admin.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :email %><br/>
+    <%= f.email_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+  <!--<div class="form-group">-->
+  <!--<#%= f.label :password_confirmation %>-->
+  <!--<#%= f.password_field :password_confirmation, class: 'form-control' %>-->
+  <!--</div>-->
+  <%= f.submit 'accept', class: 'btn btn-default' %>
+  <%= link_to 'cancel', admin_path, class: 'btn btn-default' %>
+<% end %>

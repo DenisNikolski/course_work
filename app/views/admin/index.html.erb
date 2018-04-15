@@ -23,3 +23,18 @@
     <td><%= link_to 'new product item', new_radiator_descr_path, class: 'btn btn-secondary' %></td>
   </tr>
 </table>
+<h2>Admins Manage</h2>
+<%= link_to 'new admin', admin_new_path, class: 'btn btn-secondary' %>
+<table class="table table-striped">
+  <tr>
+    <th>Email</th>
+    <th>Delete</th>
+  </tr>
+  <% @admin.each do |admin| %>
+    <tr>
+      <td><%= admin.email %></td>
+      <td><%= link_to 'delete', destroy_admin_url(admin), :method => :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
+    </tr>
+  <% end %>
+</table>
+

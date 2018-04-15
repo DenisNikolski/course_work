@@ -25,6 +25,10 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    @pipe = Pipe.find(params[:id])
+    @pipe.destroy
+    flash[:notice] = 'Pipe is removed'
+    redirect_to categories_path
   end
 
   def index

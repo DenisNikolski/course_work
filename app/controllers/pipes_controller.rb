@@ -25,7 +25,6 @@ class PipesController < ApplicationController
     @pipe.update(pipe_params)
     flash[:notice] = 'Pipe is updated'
     redirect_to pipe_path(@pipe)
-
   end
 
   def edit
