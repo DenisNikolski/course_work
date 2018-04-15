@@ -1,7 +1,12 @@
 class RadiatorsController < ApplicationController
   def new
-    @radiator = Radiator.new
-    @radiator_descr = RadiatorDescr.new
+    if admin_signed_in?
+      @radiator = Radiator.new
+      @radiator_descr = RadiatorDescr.new
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
   end
 
   def create
@@ -18,18 +23,28 @@ class RadiatorsController < ApplicationController
     @radiator = Radiator.find(params[:id])
     @radiator.update(radiator_params)
     flash[:notice] = 'Radiator is updated'
-    redirect_to categories_path
+    redirect_to radiator_path(@radiator)
   end
 
   def edit
-    @radiator = Radiator.find(params[:id])
+    if admin_signed_in?
+      @radiator = Radiator.find(params[:id])
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
   end
 
   def destroy
-    @radiator = Radiator.find(params[:id])
-    @radiator.destroy
-    flash[:notice] = 'Radiator is removed'
-    redirect_to categories_path
+    if admin_signed_in?
+      @radiator = Radiator.find(params[:id])
+      @radiator.destroy
+      flash[:notice] = 'Radiator is removed'
+      redirect_to categories_path
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
   end
 
   def index

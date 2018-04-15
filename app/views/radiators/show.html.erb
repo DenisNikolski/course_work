@@ -3,27 +3,56 @@
   <div class="flex-container">
     <%= image_tag(@radiator.img_src) %>
     <section>
-      <% if @radiator.radiator_descr.first.nil? %>
-        <h3>We are waiting for the delivery of this product</h3>
-        <p>keep in touch!</p>
-      <% else %>
-        <table class="table table-striped">
-          <tr>
-            <th>Height</th>
-            <th>Length</th>
-            <th>Weight</th>
-          </tr>
-          <% @radiator.radiator_descr.each do |descr| %>
+      <% if admin_signed_in? %>
+        <% if @radiator.radiator_descr.first.nil? %>
+          <p>No product items</p>
+          <%= link_to 'new product item', new_radiator_descr_path, class: 'btn btn-secondary' %>
+        <% else %>
+          <table class="table table-striped">
             <tr>
-              <td><%= descr.height %></td>
-              <td><%= descr.length %></td>
-              <td><%= descr.weight %></td>
+              <th>Height</th>
+              <th>Length</th>
+              <th>Weight</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
-          <% end %>
-        </table>
-        <%= link_to 'Buy from '.concat(@radiator.radiator_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
+            <% @radiator.radiator_descr.each do |descr| %>
+              <tr>
+                <td><%= descr.height %></td>
+                <td><%= descr.length %></td>
+                <td><%= descr.weight %></td>
+                <td><%= link_to 'Edit', edit_radiator_descr_path(descr), class: 'btn btn-warning' %>
+                <td><%= link_to 'Delete', radiator_descr_path(descr), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
+              </tr>
+            <% end %>
+          </table>
+          </section>
+          </div>
+          <div class="flex-container">
+            <%= link_to 'Edit', edit_radiator_path(@radiator), class: 'btn btn-warning' %>
+            <%= link_to 'Delete', radiator_path(@radiator), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+          </div>
+        <% end %>
+      <% else %>
+        <% if @radiator.radiator_descr.first.nil? %>
+          <h3>We are waiting for the delivery of this product</h3>
+          <p>keep in touch!</p>
+        <% else %>
+          <table class="table table-striped">
+            <tr>
+              <th>Height</th>
+              <th>Length</th>
+              <th>Weight</th>
+            </tr>
+            <% @radiator.radiator_descr.each do |descr| %>
+              <tr>
+                <td><%= descr.height %></td>
+                <td><%= descr.length %></td>
+                <td><%= descr.weight %></td>
+              </tr>
+            <% end %>
+          </table>
+          <%= link_to 'Buy from '.concat(@radiator.radiator_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
+        <% end %>
+        </div>
       <% end %>
-    </section>
-  </div>
-</div>
-<%= link_to 'Delete', radiator_path(@radiator), method: :delete, data: {confirm: 'Are you sure?'} %>

@@ -3,12 +3,21 @@
   <div class="row">
     <div class="col-md-8">
       <div class="row">
-        <% @products.each_slice(4) do |pipes_row| %>
-          <% pipes_row.each do |pipe| %>
+        <% @products.each_slice(4) do |product_row| %>
+          <% product_row.each do |product| %>
             <div class="col-md-3 col-sm-3">
-              <h4><%= pipe.title %></h4>
-              <%= image_tag(pipe.img_src, alt: 'pipe') %>
-              <%= link_to 'read more', pipe_path(pipe), class: 'btn btn-primary' %>
+              <h4><%= product.title %></h4>
+              <%= image_tag(product.img_src, alt: 'pipe') %>
+              <% case @category.name %>
+              <% when 'Pipes' %>
+                <%= link_to 'read more', pipe_path(product), class: 'btn btn-primary' %>
+              <% when 'Radiators' %>
+                <%= link_to 'read more', radiator_path(product), class: 'btn btn-primary' %>
+              <% when 'Valves' %>
+                <%= link_to 'read more', valve_path(product), class: 'btn btn-primary' %>
+              <% else %>
+                <%= link_to 'read more', '#', class: 'btn btn-primary' %>
+              <% end %>
             </div>
           <% end %>
         <% end %>

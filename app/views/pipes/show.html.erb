@@ -3,25 +3,53 @@
   <div class="flex-container">
     <%= image_tag(@pipe.img_src) %>
     <section>
-      <% if @pipe.pipe_descr.first.nil? %>
-        <h3>We are waiting for the delivery of this product</h3>
-        <p>keep in touch!</p>
-      <% else %>
-        <table class="table table-striped">
-          <tr>
-            <th>Diameter</th>
-            <th>Wall thickness</th>
-          </tr>
-          <% @pipe.pipe_descr.each do |descr| %>
+      <% if admin_signed_in? %>
+        <% if @pipe.pipe_descr.first.nil? %>
+          <p>No product items</p>
+          <%= link_to 'new product item', new_pipe_descr_path, class: 'btn btn-secondary' %>
+        <% else %>
+          <table class="table table-striped">
             <tr>
-              <td><%= descr.diameter %></td>
-              <td><%= descr.wall_thickness %></td>
+              <th>Diameter</th>
+              <th>Wall thickness</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
-          <% end %>
-        </table>
-        <%= link_to 'Buy from '.concat(@pipe.pipe_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
+            <% @pipe.pipe_descr.each do |descr| %>
+              <tr>
+                <td><%= descr.diameter %></td>
+                <td><%= descr.wall_thickness %></td>
+                <td><%= link_to 'Edit', edit_pipe_descr_path(descr), class: 'btn btn-warning' %>
+                <td><%= link_to 'Delete', pipe_descr_path(descr), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
+              </tr>
+            <% end %>
+          </table>
+          </section>
+          </div>
+          <div class="flex-container">
+            <%= link_to 'Edit', edit_pipe_path(@pipe), class: 'btn btn-warning' %>
+            <%= link_to 'Delete', pipe_path(@pipe), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+          </div>
+        <% end %>
+      <% else %>
+        <% if @pipe.pipe_descr.first.nil? %>
+          <h3>We are waiting for the delivery of this product</h3>
+          <p>keep in touch!</p>
+        <% else %>
+          <table class="table table-striped">
+            <tr>
+              <th>Diameter</th>
+              <th>Wall thickness</th>
+            </tr>
+            <% @pipe.pipe_descr.each do |descr| %>
+              <tr>
+                <td><%= descr.diameter %></td>
+                <td><%= descr.wall_thickness %></td>
+              </tr>
+            <% end %>
+          </table>
+          <%= link_to 'Buy from '.concat(@pipe.pipe_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
+        <% end %>
+        </div>
       <% end %>
-    </section>
-  </div>
-</div>
-<%= link_to 'Delete', pipe_path(@pipe), method: :delete, data: {confirm: 'Are you sure?'} %>
+

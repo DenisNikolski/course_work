@@ -28,11 +28,16 @@
         <li class="nav-item <%= params[:controller] == 'about' ? 'active' : '' %> ">
           <%= link_to 'About', about_path, class: 'nav-link' %>
         </li>
+        <% if admin_signed_in? %>
+          <li class="nav-item <%= params[:controller] == 'admin' ? 'active' : '' %>">
+            <%= link_to 'Admin', admin_path, class: 'nav-link' %>
+          </li>
+        <% end %>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <!--<form class="form-inline my-2 my-lg-0">-->
+      <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+      <!--</form>-->
     </div>
   </nav>
 </header>

@@ -1,4 +1,4 @@
-<h1>Edit Pipe</h1>
+<h1>Edit Radiator</h1>
 <%= form_for @radiator do |f| %>
   <% if @radiator.errors.any? %>
     <% @radiator.errors.full_messages.each do |msg| %>
@@ -19,6 +19,6 @@
                  {:include_blank => 'select one'}, class: 'form-control' %>
   </div>
   <%= f.submit 'submit', class: 'btn btn-primary' %>
-  <%= link_to 'cancel', radiators_path, class: 'btn btn-default' %>
+  <%= link_to 'cancel', radiator_path(@radiator), class: 'btn btn-default' %>
 
 <% end %>

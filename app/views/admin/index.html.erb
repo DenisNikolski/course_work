@@ -1,0 +1,24 @@
+<%= link_to 'go to main', categories_path, class: 'btn btn-success' %>
+<%= link_to 'sign out', destroy_admin_session_path, class: 'btn btn-danger', method: :delete %>
+<h2>Add new product</h2>
+<table class="table table-striped">
+  <tr>
+    <th>Product</th>
+    <th>Add new product</th>
+    <th>Add new product description</th>
+  </tr>
+  <tr>
+    <td>Pipe</td>
+    <td><%= link_to 'new product', new_pipe_path, class: 'btn btn-primary' %></td>
+    <td><%=	 link_to 'new product item',new_pipe_descr_path, class: 'btn btn-secondary' %></td>
+  </tr>
+  <tr>
+    <td>Valve</td>
+    <!--<td><#%= link_to 'add new', new_valve_path, class: 'btn btn-primary' %></td>-->
+  </tr>
+  <tr>
+    <td>Radiator</td>
+    <td><%= link_to 'new product', new_radiator_path, class: 'btn btn-primary' %></td>
+    <td><%=	 link_to 'new product item',new_radiator_descr_path, class: 'btn btn-secondary' %></td>
+  </tr>
+</table>

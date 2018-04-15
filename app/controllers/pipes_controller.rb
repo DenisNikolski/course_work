@@ -1,7 +1,12 @@
 class PipesController < ApplicationController
   def new
-    @pipe = Pipe.new
-    @pipe_descr = PipeDescr.new
+    if admin_signed_in?
+      @pipe = Pipe.new
+      @pipe_descr = PipeDescr.new
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
   end
 
   def create
@@ -18,18 +23,29 @@ class PipesController < ApplicationController
     @pipe = Pipe.find(params[:id])
     @pipe.update(pipe_params)
     flash[:notice] = 'Pipe is updated'
-    redirect_to categories_path
+    redirect_to pipe_path(@pipe)
+
   end
 
   def edit
-    @pipe = Pipe.find(params[:id])
+    if admin_signed_in?
+      @pipe = Pipe.find(params[:id])
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
   end
 
   def destroy
-    @pipe = Pipe.find(params[:id])
-    @pipe.destroy
-    flash[:notice] = 'Pipe is removed'
-    redirect_to categories_path
+    if admin_signed_in?
+      @pipe = Pipe.find(params[:id])
+      @pipe.destroy
+      flash[:notice] = 'Pipe is removed'
+      redirect_to categories_path
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
   end
 
   def index
