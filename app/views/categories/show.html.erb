@@ -5,9 +5,9 @@
       <div class="row">
         <% @products.each_slice(4) do |product_row| %>
           <% product_row.each do |product| %>
-            <div class="col-md-3 col-sm-3">
-              <h4><%= product.title %></h4>
-              <%= image_tag(product.img_src, alt: 'pipe') %>
+            <div class="card">
+              <%= image_tag product.img_src, alt: 'product', class: 'card-img-top' %>
+              <h5 class='card-title'><%= product.title %></h5>
               <% case @category.name %>
               <% when 'Pipes' %>
                 <%= link_to 'read more', pipe_path(product), class: 'btn btn-primary' %>

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :valves
+  resources :valves do
+    collection {post :import_from_file}
+  end
   resources :valve_descrs
   resources :pipes
   resources :pipe_descrs
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   devise_for :admin
   get 'admin_new', to: 'admin#new_admin'
   post 'admin_new', to: 'admin#create_admin'
-  match '/admin/:id', to: 'admin#show',    as: :admin_show, via: :get
+  match '/admin/:id', to: 'admin#show', as: :admin_show, via: :get
   match '/admin/:id', to: 'admin#destroy', as: :destroy_admin, via: :delete
 
   scope '/admin' do

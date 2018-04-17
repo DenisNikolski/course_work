@@ -57,9 +57,37 @@ class ValvesController < ApplicationController
     @valve_descr = ValveDescr.find_by_valve_id(params[:id])
   end
 
+  def import_from_file
+    if admin_signed_in?
+      fields_to_insert = %w[title category_id img_src]
+      file = params[:file]
+      notice = 'Failed: no file or incorrect file!'
+      unless file.nil?
+        if file.path.include? '.csv'
+          CSV.foreach(file.path, headers: true) do |row|
+            row_to_insert = row.to_hash.select {|k, v| fields_to_insert.include?(k)}
+            Valve.create! row_to_insert
+          end
+          notice = 'Data imported'
+        elsif file.path.include? '.xml'
+          Hash.from_xml(File.read(file.path)).values.first.values.first.each do |row|
+            row_to_insert = row.select {|k, v| fields_to_insert.include?(k)}
+            Valve.create! row_to_insert
+          end
+          notice = 'Data imported'
+        end
+      end
+      redirect_to admin_path, notice: notice
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
+  end
+
   private
 
   def valve_params
     params.require(:valve).permit(:title, :category_id, :img_src)
   end
+
 end

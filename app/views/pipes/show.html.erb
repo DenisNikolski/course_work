@@ -1,7 +1,9 @@
 <div id="show">
   <h2><%= @pipe.title %></h2>
   <div class="flex-container">
-    <%= image_tag(@pipe.img_src) %>
+    <!--<div class="card">-->
+      <%= image_tag @pipe.img_src, class: '' %>
+    <!--</div>-->
     <section>
       <% if admin_signed_in? %>
         <% if @pipe.pipe_descr.first.nil? %>

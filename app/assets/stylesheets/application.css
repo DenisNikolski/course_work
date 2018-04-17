@@ -40,31 +40,15 @@ footer {
     text-align: center;
 }
 
-#index .col-md-3 {
-    margin-top: 15px;
-
-}
-
-#index h4 {
-    margin-bottom: 0;
-    height: 15%;
-    font-size: 1em;
+.card {
+    width: 15rem;
+    margin: 5px;
 }
 
 #index img {
     width: 100%;
-    height: 70%;
+    height: 100%;
     padding: 3px;
-}
-
-#index .btn {
-    display: block;
-    height: 15%;
-
-}
-
-#index .row {
-    margin-bottom: 3%;
 }
 
 .sidebar {
@@ -100,4 +84,12 @@ footer {
 
 #show .table-striped {
     margin-left: 25%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label.btn.btn-dark {
+    margin: 0;
 }

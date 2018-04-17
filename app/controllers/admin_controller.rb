@@ -5,7 +5,7 @@ class AdminController < ApplicationController
     @admin = Admin.all
   end
 
-  def destroy
+  def destroy_admin
     @admin = Admin.find(params[:id])
     @admin.destroy
     flash[:notice] = 'Admin is removed'

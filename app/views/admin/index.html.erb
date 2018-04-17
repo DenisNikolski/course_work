@@ -1,25 +1,41 @@
-<%= link_to 'go to main', categories_path, class: 'btn btn-success' %>
+<div></div><%= link_to 'go to main', categories_path, class: 'btn btn-success' %>
 <%= link_to 'sign out', destroy_admin_session_path, class: 'btn btn-danger', method: :delete %>
 <h2>Add new product</h2>
 <table class="table table-striped">
   <tr>
     <th>Product</th>
     <th>Add new product</th>
+    <th>Add from file</th>
     <th>Add new product description</th>
+    <th>Add from file</th>
   </tr>
   <tr>
     <td>Pipe</td>
     <td><%= link_to 'new product', new_pipe_path, class: 'btn btn-primary' %></td>
+    <td></td>
     <td><%= link_to 'new product item', new_pipe_descr_path, class: 'btn btn-secondary' %></td>
   </tr>
   <tr>
     <td>Valve</td>
     <td><%= link_to 'new product', new_valf_path, class: 'btn btn-primary' %></td>
+    <td>
+      <%= form_tag import_from_file_valves_path, multipart: true do %>
+        <%= file_field_tag :file, id: 'file-input' %>
+        <label for="file-input" class="btn btn-dark">
+          <span class="upload">Choose file</span>
+        </label>
+        <%= submit_tag 'Import file', class: 'btn btn-dark' %>
+      <% end %>
+    </td>
     <td><%= link_to 'new product item', new_valve_descr_path, class: 'btn btn-secondary' %></td>
+    <td></td>
   </tr>
   <tr>
     <td>Radiator</td>
     <td><%= link_to 'new product', new_radiator_path, class: 'btn btn-primary' %></td>
+    <td>
+
+    </td>
     <td><%= link_to 'new product item', new_radiator_descr_path, class: 'btn btn-secondary' %></td>
   </tr>
 </table>

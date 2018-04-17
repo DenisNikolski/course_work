@@ -5,27 +5,27 @@
       <div class="row">
         <% @pipes.each_slice(4) do |pipes_row| %>
           <% pipes_row.each do |pipe| %>
-            <div class="col-md-3 col-sm-3">
-              <h4><%= pipe.title %></h4>
-              <%= image_tag(pipe.img_src, alt: 'pipe') %>
+            <div class="card">
+              <%= image_tag pipe.img_src, alt: 'pipe', class: 'card-img-top' %>
+              <h5 class='card-title'><%= pipe.title %></h5>
               <%= link_to 'read more', pipe_path(pipe), class: 'btn btn-primary' %>
             </div>
           <% end %>
         <% end %>
         <% @radiators.each_slice(4) do |radiators_row| %>
           <% radiators_row.each do |radiator| %>
-            <div class="col-md-3 col-sm-3">
-              <h4><%= radiator.title %></h4>
-              <%= image_tag(radiator.img_src, alt: 'radiator') %>
+            <div class="card">
+              <%= image_tag radiator.img_src, alt: 'pipe', class: 'card-img-top' %>
+              <h5 class='card-title'><%= radiator.title %></h5>
               <%= link_to 'read more', radiator_path(radiator), class: 'btn btn-primary' %>
             </div>
           <% end %>
         <% end %>
         <% @valves.each_slice(4) do |valves_row| %>
           <% valves_row.each do |valve| %>
-            <div class="col-md-3 col-sm-3">
-              <h4><%= valve.title %></h4>
-              <%= image_tag(valve.img_src, alt: 'valve') %>
+            <div class="card">
+              <%= image_tag valve.img_src, alt: 'pipe', class: 'card-img-top' %>
+              <h5 class='card-title'><%= valve.title %></h5>
               <%= link_to 'read more', valf_path(valve), class: 'btn btn-primary' %>
             </div>
           <% end %>
