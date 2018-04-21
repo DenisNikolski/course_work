@@ -29,8 +29,11 @@
           <%= link_to 'About', about_path, class: 'nav-link' %>
         </li>
         <% if admin_signed_in? %>
-          <li class="nav-item <%= params[:controller] == 'admin' ? 'active' : '' %>">
-            <%= link_to 'Admin', admin_path, class: 'nav-link' %>
+          <li class="nav-item active">
+            <%= link_to 'Admin', admin_path, class: 'nav-link btn btn-success' %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to 'Sign out', destroy_admin_session_path, class: 'nav-link btn btn-danger', method: :delete %>
           </li>
         <% end %>
       </ul>
@@ -58,11 +61,12 @@
 
 </section>
 
-<footer>
+<footer class="footer">
   <div class="container">
     <p>Denis Nikolski 2018</p>
   </div>
 </footer>
+
 
 </body>
 </html>

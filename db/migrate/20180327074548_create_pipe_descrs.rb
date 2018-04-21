@@ -4,7 +4,8 @@ class CreatePipeDescrs < ActiveRecord::Migration[5.1]
       t.integer :diameter
       t.float :wall_thickness
       t.float :price
-      t.integer :pipe_id
+      t.belongs_to :pipe, foreign_key: true
+
       t.timestamps
     end
   end

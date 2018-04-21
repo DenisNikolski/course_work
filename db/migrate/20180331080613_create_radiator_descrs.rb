@@ -5,7 +5,7 @@ class CreateRadiatorDescrs < ActiveRecord::Migration[5.1]
       t.string :length
       t.string :weight
       t.float :price
-      t.integer :radiator_id
+      t.belongs_to :radiator, foreign_key: true
 
       t.timestamps
     end

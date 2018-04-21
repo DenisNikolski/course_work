@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180415143541) do
+ActiveRecord::Schema.define(version: 20180421202233) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -35,13 +35,23 @@ ActiveRecord::Schema.define(version: 20180415143541) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "telephone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pipe_descrs", force: :cascade do |t|
     t.integer "diameter"
     t.float "wall_thickness"
     t.float "price"
+    t.integer "pipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "pipe_id"
+    t.index ["pipe_id"], name: "index_pipe_descrs_on_pipe_id"
   end
 
   create_table "pipes", force: :cascade do |t|
@@ -50,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180415143541) do
     t.string "img_src"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_pipes_on_category_id"
   end
 
   create_table "radiator_descrs", force: :cascade do |t|
@@ -60,6 +71,7 @@ ActiveRecord::Schema.define(version: 20180415143541) do
     t.integer "radiator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["radiator_id"], name: "index_radiator_descrs_on_radiator_id"
   end
 
   create_table "radiators", force: :cascade do |t|
@@ -68,6 +80,27 @@ ActiveRecord::Schema.define(version: 20180415143541) do
     t.string "img_src"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_radiators_on_category_id"
+  end
+
+  create_table "shopping_cart_items", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "product_id"
+    t.integer "product_item_id"
+    t.integer "amount"
+    t.float "price"
+    t.integer "shopping_cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shopping_cart_id"], name: "index_shopping_cart_items_on_shopping_cart_id"
+  end
+
+  create_table "shopping_carts", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_shopping_carts_on_customer_id"
   end
 
   create_table "valve_descrs", force: :cascade do |t|
@@ -78,14 +111,16 @@ ActiveRecord::Schema.define(version: 20180415143541) do
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["valve_id"], name: "index_valve_descrs_on_valve_id"
   end
 
   create_table "valves", force: :cascade do |t|
     t.string "title"
-    t.integer "category_id"
     t.string "img_src"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_valves_on_category_id"
   end
 
 end
