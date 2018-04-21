@@ -56,6 +56,33 @@ class RadiatorsController < ApplicationController
     @radiator_descr = RadiatorDescr.find_by_radiator_id(params[:id])
   end
 
+  def import_from_file
+    if admin_signed_in?
+      fields_to_insert = %w[title category_id img_src]
+      file = params[:file]
+      notice = 'Failed: no file or incorrect file (Radiators)!'
+      unless file.nil?
+        if file.path.include? '.csv'
+          CSV.foreach(file.path, headers: true) do |row|
+            row_to_insert = row.to_hash.select {|k, v| fields_to_insert.include?(k)}
+            Radiator.create! row_to_insert
+          end
+          notice = 'Data (Radiators) imported from csv'
+        elsif file.path.include? '.xml'
+          Hash.from_xml(File.read(file.path)).values.first.values.first.each do |row|
+            row_to_insert = row.select {|k, v| fields_to_insert.include?(k)}
+            Radiator.create! row_to_insert
+          end
+          notice = 'Data (Radiators) imported from xml'
+        end
+      end
+      redirect_to admin_path, notice: notice
+    else
+      flash[:alert] = 'You need to authorise'
+      redirect_to root_path
+    end
+  end
+
   private
 
   def radiator_params

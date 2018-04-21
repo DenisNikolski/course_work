@@ -61,20 +61,20 @@ class ValvesController < ApplicationController
     if admin_signed_in?
       fields_to_insert = %w[title category_id img_src]
       file = params[:file]
-      notice = 'Failed: no file or incorrect file!'
+      notice = 'Failed: no file or incorrect file (Valves)!'
       unless file.nil?
         if file.path.include? '.csv'
           CSV.foreach(file.path, headers: true) do |row|
             row_to_insert = row.to_hash.select {|k, v| fields_to_insert.include?(k)}
             Valve.create! row_to_insert
           end
-          notice = 'Data imported'
+          notice = 'Data (Valves) imported from csv'
         elsif file.path.include? '.xml'
           Hash.from_xml(File.read(file.path)).values.first.values.first.each do |row|
             row_to_insert = row.select {|k, v| fields_to_insert.include?(k)}
             Valve.create! row_to_insert
           end
-          notice = 'Data imported'
+          notice = 'Data (Valves) imported from xml'
         end
       end
       redirect_to admin_path, notice: notice

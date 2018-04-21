@@ -1,56 +1,129 @@
-<div></div><%= link_to 'go to main', categories_path, class: 'btn btn-success' %>
-<%= link_to 'sign out', destroy_admin_session_path, class: 'btn btn-danger', method: :delete %>
-<h2>Add new product</h2>
-<table class="table table-striped">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+<table class="table">
+  <thead class="thead-light">
   <tr>
-    <th>Product</th>
-    <th>Add new product</th>
-    <th>Add from file</th>
-    <th>Add new product description</th>
-    <th>Add from file</th>
+    <th>
+      <%= link_to 'go to main', categories_path, class: 'btn btn-success' %>
+      <%= link_to 'sign out', destroy_admin_session_path, class: 'btn btn-danger', method: :delete %>
+    </th>
   </tr>
-  <tr>
-    <td>Pipe</td>
-    <td><%= link_to 'new product', new_pipe_path, class: 'btn btn-primary' %></td>
-    <td></td>
-    <td><%= link_to 'new product item', new_pipe_descr_path, class: 'btn btn-secondary' %></td>
-  </tr>
-  <tr>
-    <td>Valve</td>
-    <td><%= link_to 'new product', new_valf_path, class: 'btn btn-primary' %></td>
-    <td>
-      <%= form_tag import_from_file_valves_path, multipart: true do %>
-        <%= file_field_tag :file, id: 'file-input' %>
-        <label for="file-input" class="btn btn-dark">
-          <span class="upload">Choose file</span>
-        </label>
-        <%= submit_tag 'Import file', class: 'btn btn-dark' %>
+  </thead>
+</table>
+
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Products</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Admins</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Purchase</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <h2>Add new product</h2>
+    <table class="table table-striped">
+      <tr>
+        <th>Product</th>
+        <th>Add new product</th>
+        <th>Add from file</th>
+        <th>Add new product description</th>
+        <th>Add from file</th>
+      </tr>
+      <tr>
+        <td>Pipe</td>
+        <td><%= link_to 'new product', new_pipe_path, class: 'btn btn-primary' %></td>
+        <td>
+          <%= form_tag import_from_file_pipes_path, multipart: true do %>
+            <%= file_field_tag :file, id: 'file-input-pipes' %>
+            <label for="file-input-pipes" class="btn btn-dark">
+              <span class="upload">Choose file</span>
+            </label>
+            <%= submit_tag 'Import file', class: 'btn btn-dark' %>
+          <% end %>
+        </td>
+        <td><%= link_to 'new product item', new_pipe_descr_path, class: 'btn btn-primary' %></td>
+        <td>
+          <%= form_tag import_from_file_pipe_descrs_path, multipart: true do %>
+            <%= file_field_tag :file, id: 'file-input-pipe-descrs' %>
+            <label for="file-input-pipe-descrs" class="btn btn-dark">
+              <span class="upload">Choose file</span>
+            </label>
+            <%= submit_tag 'Import file', class: 'btn btn-dark' %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>Valve</td>
+        <td><%= link_to 'new product', new_valf_path, class: 'btn btn-primary' %></td>
+        <td>
+          <%= form_tag import_from_file_valves_path, multipart: true do %>
+            <%= file_field_tag :file, id: 'file-input-valves' %>
+            <label for="file-input-valves" class="btn btn-dark">
+              <span class="upload">Choose file</span>
+            </label>
+            <%= submit_tag 'Import file', class: 'btn btn-dark' %>
+          <% end %>
+        </td>
+        <td><%= link_to 'new product item', new_valve_descr_path, class: 'btn btn-primary' %></td>
+        <td>
+          <%= form_tag import_from_file_valve_descrs_path, multipart: true do %>
+            <%= file_field_tag :file, id: 'file-input-valve-desrcs' %>
+            <label for="file-input-valve-desrcs" class="btn btn-dark">
+              <span class="upload">Choose file</span>
+            </label>
+            <%= submit_tag 'Import file', class: 'btn btn-dark' %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>Radiator</td>
+        <td><%= link_to 'new product', new_radiator_path, class: 'btn btn-primary' %></td>
+        <td>
+          <%= form_tag import_from_file_radiators_path, multipart: true do %>
+            <%= file_field_tag :file, id: 'file-input-radiators' %>
+            <label for="file-input-radiators" class="btn btn-dark">
+              <span class="upload">Choose file</span>
+            </label>
+            <%= submit_tag 'Import file', class: 'btn btn-dark' %>
+          <% end %>
+        </td>
+        <td><%= link_to 'new product item', new_radiator_descr_path, class: 'btn btn-primary' %></td>
+        <td>
+          <%= form_tag import_from_file_radiator_descrs_path, multipart: true do %>
+            <%= file_field_tag :file, id: 'file-input-radiator-descrs' %>
+            <label for="file-input-radiator-descrs" class="btn btn-dark">
+              <span class="upload">Choose file</span>
+            </label>
+            <%= submit_tag 'Import file', class: 'btn btn-dark' %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <h2>Manage Admins</h2>
+    <table class="table table-striped">
+      <thead class="thead-light">
+      <tr>
+        <th><%= link_to 'new admin', admin_new_path, class: 'btn btn-secondary' %></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tr>
+        <th>Email</th>
+        <th>Delete</th>
+      </tr>
+      <% @admin.each do |admin| %>
+        <tr>
+          <td><%= admin.email %></td>
+          <td><%= link_to 'delete', destroy_admin_url(admin), :method => :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
+        </tr>
       <% end %>
-    </td>
-    <td><%= link_to 'new product item', new_valve_descr_path, class: 'btn btn-secondary' %></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Radiator</td>
-    <td><%= link_to 'new product', new_radiator_path, class: 'btn btn-primary' %></td>
-    <td>
-
-    </td>
-    <td><%= link_to 'new product item', new_radiator_descr_path, class: 'btn btn-secondary' %></td>
-  </tr>
-</table>
-<h2>Admins Manage</h2>
-<%= link_to 'new admin', admin_new_path, class: 'btn btn-secondary' %>
-<table class="table table-striped">
-  <tr>
-    <th>Email</th>
-    <th>Delete</th>
-  </tr>
-  <% @admin.each do |admin| %>
-    <tr>
-      <td><%= admin.email %></td>
-      <td><%= link_to 'delete', destroy_admin_url(admin), :method => :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
-    </tr>
-  <% end %>
-</table>
-
+    </table>
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div>
