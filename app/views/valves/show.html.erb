@@ -43,16 +43,23 @@
               <th>Radius</th>
               <th>Pressure</th>
               <th>Max temperature</th>
+              <th>Price</th>
+              <th></th>
             </tr>
             <% @valve.valve_descrs.each do |descr| %>
               <tr>
                 <td><%= descr.radius %></td>
                 <td><%= descr.pressure %></td>
                 <td><%= descr.max_temperature %></td>
+                <td><%= descr.price.to_s.concat('$') %></td>
+                <td><%= button_to 'Add co cart',
+                                shopping_cart_item_path(
+                                    category_id: '2', product_id: @valve.id, product_item_id: descr.id,
+                                    price: descr.price, amount: 1),
+                                class: 'btn btn-success'%></td>
               </tr>
             <% end %>
           </table>
-          <%= link_to 'Buy from '.concat(@valve.valve_descrs.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
         <% end %>
         </div>
       <% end %>

@@ -1,0 +1,56 @@
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+  <table id="cart" class="table table-hover table-condensed">
+    <thead>
+    <tr>
+      <th style="width:50%">Product</th>
+      <th style="width:10%">Price</th>
+      <th style="width:8%">Quantity</th>
+      <th style="width:22%" class="text-center">Subtotal</th>
+      <th style="width:10%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @product.each do |product, product_items| %>
+      <% product_items.each do |item| %>
+        <td data-th="Product">
+          <div class="row">
+            <div class="col-sm-3 hidden-xs"><%= image_tag product.img_src, class: '' %></div>
+            <div class="col-sm-8">
+              <h4 class="nomargin"><%= product.title %></h4>
+              <% attributes = product_items[0][0].attribute_names - %w(id created_at updated_at valve_id pipe_id radiator_id price) %>
+              <% attributes.each do |attr| %>
+                <%= attr %>
+                <%= item[0][attr] %>
+                <br>
+              <% end %>
+              </p>
+            </div>
+          </div>
+        </td>
+        <td data-th="Price"><%= number_to_currency(item[0].price) %></td>
+        <td data-th="Quantity">
+          <!--<div class="form-control text-center"></div>-->
+          <%= item[1] %>
+          <!--<input type="number" class="form-control text-center" value="1">-->
+        </td>
+        <td data-th="Subtotal" class="text-center"><%= number_to_currency(item[2]) %></td>
+        <td class="actions" data-th="">
+          <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+          <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+        </td>
+        </tbody>
+      <% end %>
+    <% end %>
+    <tfoot>
+    <tr>
+      <td><%= link_to 'Continue Shopping', root_path, class: 'btn btn-warning' %></td>
+      <td><%= button_to 'Empty cart', @shopping_cart, :method => :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
+      <td colspan="1" class="hidden-xs"></td>
+      <td class="hidden-xs text-center"><strong>Total <%= number_to_currency(@shopping_cart.total_price) %></strong>
+      </td>
+      <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+    </tr>
+    </tfoot>
+    </table>
+</div>

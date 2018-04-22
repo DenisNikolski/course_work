@@ -43,16 +43,23 @@
               <th>Height</th>
               <th>Length</th>
               <th>Weight</th>
+              <th>Price</th>
+              <th></th>
             </tr>
             <% @radiator.radiator_descr.each do |descr| %>
               <tr>
                 <td><%= descr.height %></td>
                 <td><%= descr.length %></td>
                 <td><%= descr.weight %></td>
+                <td><%= descr.price.to_s.concat('$') %></td>
+                <td><%= button_to 'Add co cart',
+                                  shopping_cart_item_path(
+                                      category_id: '3', product_id: @radiator.id, product_item_id: descr.id,
+                                      price: descr.price, amount: 1),
+                                  class: 'btn btn-success' %></td>
               </tr>
             <% end %>
           </table>
-          <%= link_to 'Buy from '.concat(@radiator.radiator_descr.first.price.to_s).concat('$'), '#', class: 'btn btn-success', target: '_blank' %>
         <% end %>
         </div>
       <% end %>
