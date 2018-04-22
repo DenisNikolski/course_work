@@ -2,7 +2,7 @@ class ShoppingCart < ApplicationRecord
   # belongs_to :customer
   has_many :shopping_cart_items, dependent: :destroy
 
-  def add_product_item(product_item,shopping_cart_id)
+  def add_product_item(product_item, shopping_cart_id)
     current_item = shopping_cart_items.find_by(
       category_id: product_item[:category_id],
       product_id: product_item[:product_id],

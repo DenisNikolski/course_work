@@ -1,6 +1,6 @@
 class ShoppingCartItemsController < ApplicationController
   before_action :set_shopping_cart_item, only: %i[show edit update destroy]
-  before_action :set_shopping_cart, only: [:create]
+  before_action :set_shopping_cart, only: %i[create update]
 
   # GET /shopping_cart_items
   # GET /shopping_cart_items.json
@@ -43,7 +43,7 @@ class ShoppingCartItemsController < ApplicationController
   def update
     respond_to do |format|
       if @shopping_cart_item.update(shopping_cart_item_params)
-        format.html {redirect_to @shopping_cart_item, notice: 'Shopping cart item was successfully updated.'}
+        format.html {redirect_to @shopping_cart, notice: 'Shopping cart item was successfully updated.'}
         format.json {render :show, status: :ok, location: @shopping_cart_item}
       else
         format.html {render :edit}
@@ -72,6 +72,6 @@ class ShoppingCartItemsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def shopping_cart_item_params
-    params.fetch(:shopping_cart_item, {})
+    params.require(:shopping_cart_item).permit(:amount)
   end
 end

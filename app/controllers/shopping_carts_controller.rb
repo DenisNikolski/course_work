@@ -18,13 +18,13 @@ class ShoppingCartsController < ApplicationController
       case item.category_id
       when 1
         product = Pipe.find(item.product_id)
-        @element = [[PipeDescr.find(item.product_item_id), item.amount, item.total_price]]
+        @element = [[PipeDescr.find(item.product_item_id), item.amount, item.total_price,item.id]]
       when 2
         product = Valve.find(item.product_id)
-        @element = [[ValveDescr.find(item.product_item_id), item.amount, item.total_price]]
+        @element = [[ValveDescr.find(item.product_item_id), item.amount, item.total_price,item.id]]
       when 3
         product = Radiator.find(item.product_id)
-        @element = [[RadiatorDescr.find(item.product_item_id), item.amount, item.total_price]]
+        @element = [[RadiatorDescr.find(item.product_item_id), item.amount, item.total_price,item.id]]
       else
         product = ''
       end

@@ -29,16 +29,27 @@
           </div>
         </td>
         <td data-th="Price"><%= number_to_currency(item[0].price) %></td>
-        <td data-th="Quantity">
-          <!--<div class="form-control text-center"></div>-->
-          <%= item[1] %>
-          <!--<input type="number" class="form-control text-center" value="1">-->
-        </td>
-        <td data-th="Subtotal" class="text-center"><%= number_to_currency(item[2]) %></td>
-        <td class="actions" data-th="">
-          <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-          <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-        </td>
+        <% shopping_cart_item = @shopping_cart_items.find(item[3]) %>
+        <%= form_for(shopping_cart_item, :html => {:method => :patch, :remote => true}) do |f| %>
+          <td data-th="Quantity">
+            <%= f.number_field :amount, value: item[1] %>
+          </td>
+          <td data-th="Subtotal" class="text-center"><%= number_to_currency(item[2]) %></td>
+          <td class="actions" data-th="">
+            <%= button_tag type: 'submit', class: 'btn btn-info btn-sm' do %>
+              <i class="fa fa-refresh"></i>
+            <% end %>
+        <% end %>
+        <%= form_for(shopping_cart_item, :html => {:method => :delete, :remote => true},
+                     data: {confirm: 'Are you sure?'}) do |f| %>
+          <%= button_tag type: 'submit', class: 'btn btn-danger btn-sm' do %>
+            <i class="fa fa-trash-o"></i>
+          <% end %>
+
+          </td>
+        <% end %>
+
+
         </tbody>
       <% end %>
     <% end %>
@@ -49,7 +60,7 @@
       <td colspan="1" class="hidden-xs"></td>
       <td class="hidden-xs text-center"><strong>Total <%= number_to_currency(@shopping_cart.total_price) %></strong>
       </td>
-      <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+      <td><%= link_to 'Checkout', root_path, class: 'btn btn-success' %></td>
     </tr>
     </tfoot>
     </table>
