@@ -5,10 +5,15 @@
       <div class="row">
         <% @pipes.each_slice(4) do |pipes_row| %>
           <% pipes_row.each do |pipe| %>
-            <div class="card">
-              <%= image_tag pipe.img_src, alt: 'pipe', class: 'card-img-top' %>
+            <div class="card container">
+              <%= link_to pipe_path(pipe) do %>
+                <%= image_tag pipe.img_src, alt: 'pipe', class: 'card-img-top image' %>
+              <% end %>
+              <div class="middle">
+                <div class="text">read more</div>
+              </div>
               <h5 class='card-title'><%= pipe.title %></h5>
-              <%= link_to 'read more', pipe_path(pipe), class: 'btn btn-primary' %>
+              <!--<#%= link_to 'read more', pipe_path(pipe), class: 'btn btn-primary' %>-->
             </div>
           <% end %>
         <% end %>
