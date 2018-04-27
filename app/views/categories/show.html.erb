@@ -6,18 +6,23 @@
         <% @products.each_slice(4) do |product_row| %>
           <% product_row.each do |product| %>
             <div class="card">
-              <%= image_tag product.img_src, alt: 'product', class: 'card-img-top' %>
-              <h5 class='card-title'><%= product.title %></h5>
               <% case @category.name %>
               <% when 'Pipes' %>
-                <%= link_to 'read more', pipe_path(product), class: 'btn btn-primary' %>
+                <% product_path = pipe_path(product) %>
               <% when 'Radiators' %>
-                <%= link_to 'read more', radiator_path(product), class: 'btn btn-primary' %>
+                <% product_path = radiator_path(product) %>
               <% when 'Valves' %>
-                <%= link_to 'read more', valf_path(product), class: 'btn btn-primary' %>
+                <% product_path = valf_path(product) %>
               <% else %>
-                <%= link_to 'read more', '#', class: 'btn btn-primary' %>
+                <% product_path = '#' %>
               <% end %>
+              <%= link_to product_path, class: 'card-img-top' do %>
+                <%= image_tag product.img_src, alt: 'product', class: 'card-img-top' %>
+                <div class="middle">
+                  <div class="text">Read more</div>
+                </div>
+              <% end %>
+              <h5 class='card-title'><%= product.title %></h5>
             </div>
           <% end %>
         <% end %>
