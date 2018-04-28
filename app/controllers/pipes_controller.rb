@@ -12,6 +12,7 @@ class PipesController < ApplicationController
 
   def create
     @pipe = Pipe.new(pipe_params)
+    @category_id = Category.find_by_name('Pipes').id
     if @pipe.save
       flash[:notice] = 'Pipe is created'
       redirect_to '/pipe_descrs/new'

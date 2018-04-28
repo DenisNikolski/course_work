@@ -1,6 +1,6 @@
 class ShoppingCartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-  before_action :set_shopping_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_shopping_cart, only: %i[show edit update destroy]
 
   # GET /shopping_carts
   # GET /shopping_carts.json
@@ -16,17 +16,17 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart_items = ShoppingCartItem.where(shopping_cart_id: @shopping_cart.id)
     @shopping_cart_items.each do |item|
       case item.category_id
-      when 1
-        product = Pipe.find(item.product_id)
-        @element = [[PipeDescr.find(item.product_item_id), item.amount, item.total_price,item.id]]
-      when 2
-        product = Valve.find(item.product_id)
-        @element = [[ValveDescr.find(item.product_item_id), item.amount, item.total_price,item.id]]
-      when 3
-        product = Radiator.find(item.product_id)
-        @element = [[RadiatorDescr.find(item.product_item_id), item.amount, item.total_price,item.id]]
-      else
-        product = ''
+        when 1
+          product = Pipe.find(item.product_id)
+          @element = [[PipeDescr.find(item.product_item_id), item.amount, item.total_price, item.id]]
+        when 2
+          product = Valve.find(item.product_id)
+          @element = [[ValveDescr.find(item.product_item_id), item.amount, item.total_price, item.id]]
+        when 3
+          product = Radiator.find(item.product_id)
+          @element = [[RadiatorDescr.find(item.product_item_id), item.amount, item.total_price, item.id]]
+        else
+          product = ''
       end
       @product[product] += @element
       @element.clear
@@ -78,7 +78,7 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart.destroy if @shopping_cart.id == session[:shopping_cart_id]
     session[:shopping_cart_id] = nil
     respond_to do |format|
-      format.html {redirect_to shopping_carts_url, notice: 'Shopping cart was successfully destroyed.'}
+      format.html {redirect_to root_path, notice: 'Shopping cart was successfully destroyed.'}
       format.json {head :no_content}
     end
   end

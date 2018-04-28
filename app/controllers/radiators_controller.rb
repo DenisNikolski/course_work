@@ -12,6 +12,7 @@ class RadiatorsController < ApplicationController
 
   def create
     @radiator = Radiator.new(radiator_params)
+    @category_id = Category.find_by_name('Radiators').id
     if @radiator.save
       flash[:notice] = 'Radiator is created'
       redirect_to '/radiator_descrs/new'

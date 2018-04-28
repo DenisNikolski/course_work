@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import 'image_hover_overlay';
+@import "font-awesome";
 
 html {
   position: relative;
@@ -51,12 +52,11 @@ footer {
   margin: 5px;
 }
 
-#index .card-img-top  {
+#index .card-img-top {
   width: 100%;
   height: 100%;
   padding: 3px;
 }
-
 
 #index .card-img-top:hover {
   cursor: pointer;
@@ -172,4 +172,8 @@ label.btn.btn-dark {
 td.actions form {
   display: inline;
   max-width: 35px;
+}
+
+.btn {
+  margin: 3px;
 }

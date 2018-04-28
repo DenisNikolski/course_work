@@ -12,6 +12,7 @@ class ValvesController < ApplicationController
 
   def create
     @valve = Valve.new(valve_params)
+    @category_id = Category.find_by_name('Valves').id
     if @valve.save
       flash[:notice] = 'Valve is created'
       redirect_to '/valve_descrs/new'

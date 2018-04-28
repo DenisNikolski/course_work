@@ -1,3 +1,10 @@
 class Customer < ApplicationRecord
-  # has_many :shopping_carts, dependent: :delete_all
+
+  validates :first_name, presence: true,
+                         length: { minimum: 3 }
+  validates :last_name, presence: true,
+                        length: { minimum: 3 }
+  validates :email, presence: true
+  validates :telephone, presence: true
+
 end
