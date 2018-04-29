@@ -47,8 +47,6 @@
 
           </td>
         <% end %>
-
-
         </tbody>
       <% end %>
     <% end %>
@@ -59,8 +57,49 @@
       <td colspan="1" class="hidden-xs"></td>
       <td class="hidden-xs text-center"><strong>Total <%= number_to_currency(@shopping_cart.total_price) %></strong>
       </td>
-      <td><%= link_to 'Checkout', root_path, class: 'btn btn-success' %></td>
+      <td>
+        <button type="button" class="btn btn-success" id ='btn-modal' data-toggle="modal" data-target="#userdata-modal">
+          Checkout
+        </button>
+      </td>
     </tr>
     </tfoot>
     </table>
+</div>
+
+<div class="modal fade" id="userdata-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Enter contact information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for @customer do |f| %>
+          <div class="form-group">
+            <div><%= f.label :first_name %></div>
+            <div><%= f.text_field :first_name, class: 'form-control' %></div>
+          </div>
+          <div class="form-group">
+            <div><%= f.label :last_name %></div>
+            <div><%= f.text_field :last_name, class: 'form-control' %></div>
+          </div>
+          <div class="form-group">
+            <div><%= f.label :email %></div>
+            <div><%= f.email_field :email, class: 'form-control' %></div>
+          </div>
+          <div class="form-group">
+            <div><%= f.label :telephone %></div>
+            <div><%= f.telephone_field :telephone, class: 'form-control',placeholder:'375 XX XXX XX XX' %></div>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit 'submit', class: 'btn btn-primary' %>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

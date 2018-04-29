@@ -1,5 +1,8 @@
 class ShoppingCartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
+  include CurrentShoppingCart
+  # include CurrentCustomer
+  # before_action :set_customer
   before_action :set_shopping_cart, only: %i[show edit update destroy]
 
   # GET /shopping_carts
@@ -31,6 +34,11 @@ class ShoppingCartsController < ApplicationController
       @product[product] += @element
       @element.clear
     end
+    # @shopping_cart.customer_id = session[:customer_id]
+    @customer = Customer.find(@shopping_cart.customer_id)
+  rescue ActiveRecord::RecordNotFound
+    @customer = Customer.new
+
   end
 
   # GET /shopping_carts/new
@@ -86,9 +94,9 @@ class ShoppingCartsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_shopping_cart
-    @shopping_cart = ShoppingCart.find(params[:id])
-  end
+  # def set_shopping_cart
+  #   @shopping_cart = ShoppingCart.find(params[:id])
+  # end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def shopping_cart_params

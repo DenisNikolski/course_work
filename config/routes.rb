@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :customers
   resources :shopping_cart_items
   resources :shopping_carts
   resources :valves, :valve_descrs, :pipes, :pipe_descrs,

@@ -8,6 +8,6 @@ module CurrentShoppingCart
   rescue ActiveRecord::RecordNotFound
     @shopping_cart = ShoppingCart.create(status: 'In processing')
     session[:shopping_cart_id] = @shopping_cart.id
-
   end
+
 end
