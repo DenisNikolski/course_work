@@ -22,15 +22,20 @@ class ValvesController < ApplicationController
   end
 
   def update
+    @category_id = Category.find_by_name('Valves').id
     @valve = Valve.find(params[:id])
-    @valve.update(valve_params)
-    flash[:notice] = 'Valve is updated'
+    if @valve.update(valve_params)
+      flash[:notice] = 'Valve is updated'
+    else
+      flash[:alert] = 'Invalid data'
+    end
     redirect_to valf_path(@valve)
 
   end
 
   def edit
     if admin_signed_in?
+      @category_id = Category.find_by_name('Valves').id
       @valve = Valve.find(params[:id])
     else
       flash[:alert] = 'You need to authorise'

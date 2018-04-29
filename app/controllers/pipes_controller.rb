@@ -22,14 +22,19 @@ class PipesController < ApplicationController
   end
 
   def update
+    @category_id = Category.find_by_name('Pipes').id
     @pipe = Pipe.find(params[:id])
-    @pipe.update(pipe_params)
-    flash[:notice] = 'Pipe is updated'
+    if @pipe.update(pipe_params)
+      flash[:notice] = 'Pipe is updated'
+    else
+      flash[:alert] = 'Invalid data'
+    end
     redirect_to pipe_path(@pipe)
   end
 
   def edit
     if admin_signed_in?
+      @category_id = Category.find_by_name('Pipes').id
       @pipe = Pipe.find(params[:id])
     else
       flash[:alert] = 'You need to authorise'

@@ -112,5 +112,115 @@
   </div>
   <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
     <h2>Order management</h2>
+    <div class="row">
+      <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
+             href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+          <% @orders.each do |order| %>
+            <a class="nav-link" id="v-pills-<%= order.id.to_s %>-tab"
+               data-toggle="pill" href="#v-pills-<%= order.id.to_s %>"
+               role="tab" aria-controls="v-pills-home"
+               aria-selected="true">
+              Order#:<%= order.id %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <h3>Orders by day</h3>
+            <%= line_chart ShoppingCart.group_by_day(:created_at).count %>
+            <h3>Orders by Product</h3>
+            <%= pie_chart [["Pipes", @pipes_count], ["Valves", @valves_count], ["Radiators", @radiators_count]] %>
+          </div>
+          <% @orders.each do |order| %>
+            <div class="tab-pane fade" id="v-pills-<%= order.id.to_s %>" role="tabpanel" aria-labelledby="v-pills-<%= order.id.to_s %>-tab">
+              <% customer = Customer.find(order.customer_id) %>
+              <table class="table table-hover">
+                <tr>
+                  <th>Customer Full name</th>
+                  <th>Email</th>
+                  <th>telephone</th>
+                </tr>
+                <tr>
+                  <td><%= customer.first_name.concat(' ').concat(customer.last_name) %></td>
+                  <td><%= customer.email %></td>
+                  <td><%= customer.telephone %></td>
+                </tr>
+              </table>
+              <% shopping_cart = ShoppingCart.find(order.id) %>
+              <span>Order status</span>
+              <%= form_for(shopping_cart, :html => {:method => :patch}) do |f| %>
+                <%= f.select :status, ['In processing', 'Paid', 'Delivered'], value: order.status %>
+                <%= button_tag type: 'submit', class: 'btn btn-info btn-sm' do %>
+                  <i class="fa fa-refresh"></i>
+                <% end %>
+              <% end %>
+              <%= form_for(shopping_cart, :html => {:method => :delete},
+                           data: {confirm: 'Are you sure?'}) do |f| %>
+                <%= button_tag type: 'submit', class: 'btn btn-danger btn-sm' do %>
+                  <i class="fa fa-trash-o"></i>
+                <% end %>
+              <% end %>
+              <div class="container">
+                <table id="cart" class="table table-hover table-condensed">
+                  <thead>
+                  <tr>
+                    <th style="width:50%">Product</th>
+                    <th style="width:10%">Price</th>
+                    <th style="width:8%">Quantity</th>
+                    <th style="width:22%" class="text-center">Subtotal</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% order.shopping_cart_items.each do |cart_item| %>
+                    <% case cart_item.category_id %>
+                  <% when 1
+                       product = Pipe.find(cart_item.product_id)
+                       product_descr = PipeDescr.find(cart_item.product_item_id)
+                     when 2
+                       product = Valve.find(cart_item.product_id)
+                       product_descr = ValveDescr.find(cart_item.product_item_id)
+                     when 3
+                       product = Radiator.find(cart_item.product_id)
+                       product_descr = RadiatorDescr.find(cart_item.product_item_id)
+                     else
+                       product = '' %>
+                    <% end %>
+                    <td data-th="Product">
+                      <div class="row">
+                        <div class="col-sm-3 hidden-xs"><%= image_tag product.img_src, class: '' %></div>
+                        <div class="col-sm-8">
+                          <h4 class="nomargin"><%= product.title %></h4>
+                          <p>
+                            <% attributes = product_descr.attribute_names - %w(id created_at updated_at valve_id pipe_id radiator_id price) %>
+                            <% attributes.each do |attr| %>
+                              <%= attr %>
+                              <%= product_descr[attr] %>
+                              <br>
+                            <% end %>
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td data-th="Price"><%= number_to_currency(product_descr.price) %></td>
+                    <td data-th="Quantity"><%= cart_item.amount %></td>
+                    <td data-th="Subtotal" class="text-center"><%= number_to_currency(cart_item.total_price) %></td>
+                    </tbody>
+                  <% end %>
+                  <td colspan="3" class="hidden-xs"></td>
+                  <td class="hidden-xs text-center">
+                    <strong>Total <%= number_to_currency(order.total_price) %></strong>
+                  </td>
+                  </table>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 </div>

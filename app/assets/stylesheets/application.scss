@@ -107,7 +107,6 @@ label.btn.btn-dark {
 
 .footer {
   background-color: #333333;
-
 }
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
@@ -176,4 +175,18 @@ td.actions form {
 
 .btn {
   margin: 3px;
+}
+
+.edit_shopping_cart {
+  display: inline;
+}
+
+#v-pills-tab .nav-link {
+  margin: 3px;
+  border: 1px solid  #007bff;
+}
+
+#v-pills-tab .nav-link:hover{
+  background-color: #007bff;
+  color: white;
 }

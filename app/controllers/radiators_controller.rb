@@ -22,14 +22,19 @@ class RadiatorsController < ApplicationController
   end
 
   def update
+    @category_id = Category.find_by_name('Radiators').id
     @radiator = Radiator.find(params[:id])
-    @radiator.update(radiator_params)
+    if @radiator.update(radiator_params)
     flash[:notice] = 'Radiator is updated'
+    else
+      flash[:alert] = 'Invalid data'
+    end
     redirect_to radiator_path(@radiator)
   end
 
   def edit
     if admin_signed_in?
+      @category_id = Category.find_by_name('Radiators').id
       @radiator = Radiator.find(params[:id])
     else
       flash[:alert] = 'You need to authorise'

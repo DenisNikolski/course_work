@@ -69,9 +69,12 @@ class ShoppingCartsController < ApplicationController
   # PATCH/PUT /shopping_carts/1
   # PATCH/PUT /shopping_carts/1.json
   def update
+    if admin_signed_in?
+      @shopping_cart = ShoppingCart.find(params[:id])
+    end
     respond_to do |format|
       if @shopping_cart.update(shopping_cart_params)
-        format.html {redirect_to @shopping_cart, notice: 'Shopping cart was successfully updated.'}
+        format.html {redirect_to admin_path, notice: 'Shopping cart was successfully updated.'}
         format.json {render :show, status: :ok, location: @shopping_cart}
       else
         format.html {render :edit}
@@ -83,11 +86,20 @@ class ShoppingCartsController < ApplicationController
   # DELETE /shopping_carts/1
   # DELETE /shopping_carts/1.json
   def destroy
-    @shopping_cart.destroy if @shopping_cart.id == session[:shopping_cart_id]
-    session[:shopping_cart_id] = nil
-    respond_to do |format|
-      format.html {redirect_to root_path, notice: 'Shopping cart was successfully destroyed.'}
-      format.json {head :no_content}
+    if admin_signed_in?
+      @shopping_cart = ShoppingCart.find(params[:id])
+      @shopping_cart.destroy
+      respond_to do |format|
+        format.html {redirect_to admin_path, notice: 'Shopping cart was successfully destroyed.'}
+      end
+    else
+      @shopping_cart.destroy if @shopping_cart.id == session[:shopping_cart_id]
+      session[:shopping_cart_id] = nil
+      respond_to do |format|
+        format.html {redirect_to root_path, notice: 'Shopping cart was successfully destroyed.'}
+        format.json {head :no_content}
+      end
+
     end
   end
 
@@ -100,7 +112,7 @@ class ShoppingCartsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def shopping_cart_params
-    params.fetch(:shopping_cart, {})
+    params.require(:shopping_cart).permit(:id, :customer_id, :status)
   end
 
   def invalid_card

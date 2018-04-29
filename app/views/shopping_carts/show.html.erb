@@ -17,21 +17,22 @@
             <div class="col-sm-3 hidden-xs"><%= image_tag product.img_src, class: '' %></div>
             <div class="col-sm-8">
               <h4 class="nomargin"><%= product.title %></h4>
-              <% attributes = product_items[0][0].attribute_names - %w(id created_at updated_at valve_id pipe_id radiator_id price) %>
-              <% attributes.each do |attr| %>
-                <%= attr %>
-                <%= item[0][attr] %>
-                <br>
-              <% end %>
+              <p>
+                <% attributes = product_items[0][0].attribute_names - %w(id created_at updated_at valve_id pipe_id radiator_id price) %>
+                <% attributes.each do |attr| %>
+                  <%= attr %>
+                  <%= item[0][attr] %>
+                  <br>
+                <% end %>
               </p>
             </div>
           </div>
         </td>
         <td data-th="Price"><%= number_to_currency(item[0].price) %></td>
         <% shopping_cart_item = @shopping_cart_items.find(item[3]) %>
-        <%= form_for(shopping_cart_item, :html => {:method => :patch, :remote => true}) do |f| %>
+        <%= form_for(shopping_cart_item, :html => {:method => :patch}) do |f| %>
           <td data-th="Quantity">
-            <%= f.number_field :amount, value: item[1] %>
+            <%= f.number_field :amount, min: '1', max: '99999999', value: item[1] %>
           </td>
           <td data-th="Subtotal" class="text-center"><%= number_to_currency(item[2]) %></td>
           <td class="actions" data-th="">
@@ -39,12 +40,11 @@
               <i class="fa fa-refresh"></i>
             <% end %>
         <% end %>
-        <%= form_for(shopping_cart_item, :html => {:method => :delete, :remote => true},
+        <%= form_for(shopping_cart_item, :html => {:method => :delete},
                      data: {confirm: 'Are you sure?'}) do |f| %>
           <%= button_tag type: 'submit', class: 'btn btn-danger btn-sm' do %>
             <i class="fa fa-trash-o"></i>
           <% end %>
-
           </td>
         <% end %>
         </tbody>
@@ -58,7 +58,7 @@
       <td class="hidden-xs text-center"><strong>Total <%= number_to_currency(@shopping_cart.total_price) %></strong>
       </td>
       <td>
-        <button type="button" class="btn btn-success" id ='btn-modal' data-toggle="modal" data-target="#userdata-modal">
+        <button type="button" class="btn btn-success" id='btn-modal' data-toggle="modal" data-target="#userdata-modal">
           Checkout
         </button>
       </td>
@@ -92,7 +92,9 @@
           </div>
           <div class="form-group">
             <div><%= f.label :telephone %></div>
-            <div><%= f.telephone_field :telephone, class: 'form-control',placeholder:'375 XX XXX XX XX' %></div>
+            <div><%= f.telephone_field :telephone, class: 'form-control',
+                                       placeholder: '375 XX XXX XX XX',
+                                       pattern: '^375+[29|44|33|25]+[1-9]+[0-9]{6}' %></div>
           </div>
           <div class="modal-footer">
             <%= f.submit 'submit', class: 'btn btn-primary' %>
