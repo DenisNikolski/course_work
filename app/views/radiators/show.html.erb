@@ -13,6 +13,7 @@
               <th>Height</th>
               <th>Length</th>
               <th>Weight</th>
+              <th>Price</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -21,6 +22,7 @@
                 <td><%= descr.height %></td>
                 <td><%= descr.length %></td>
                 <td><%= descr.weight %></td>
+                <td><%= descr.price %></td>
                 <td><%= link_to 'Edit', edit_radiator_descr_path(descr), class: 'btn btn-warning' %>
                 <td><%= link_to 'Delete', radiator_descr_path(descr), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
               </tr>

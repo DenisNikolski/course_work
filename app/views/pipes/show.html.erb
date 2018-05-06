@@ -14,6 +14,7 @@
             <tr>
               <th>Diameter</th>
               <th>Wall thickness</th>
+              <th>Price</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -21,6 +22,7 @@
               <tr>
                 <td><%= descr.diameter %></td>
                 <td><%= descr.wall_thickness %></td>
+                <td><%= descr.price %></td>
                 <td><%= link_to 'Edit', edit_pipe_descr_path(descr), class: 'btn btn-warning' %>
                 <td><%= link_to 'Delete', pipe_descr_path(descr), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
               </tr>

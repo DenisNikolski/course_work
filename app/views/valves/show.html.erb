@@ -13,6 +13,7 @@
               <th>Radius</th>
               <th>Pressure</th>
               <th>Max temperature</th>
+              <th>Price</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -21,6 +22,7 @@
                 <td><%= descr.radius %></td>
                 <td><%= descr.pressure %></td>
                 <td><%= descr.max_temperature %></td>
+                <td><%=	descr.price  %></td>
                 <td><%= link_to 'Edit', edit_valve_descr_path(descr), class: 'btn btn-warning' %>
                 <td><%= link_to 'Delete', valve_descr_path(descr), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
               </tr>
