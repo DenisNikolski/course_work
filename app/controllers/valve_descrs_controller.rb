@@ -39,7 +39,7 @@ class ValveDescrsController < ApplicationController
       @valve_descr = ValveDescr.find(params[:id])
       @valve_descr.destroy
       flash[:notice] = 'Valve item is removed'
-      redirect_to valve_path(@valve_descr.valve_id)
+      redirect_to valf_path(@valve_descr.valve_id)
     else
       flash[:alert] = 'You need to authorise'
       redirect_to root_path
