@@ -1,5 +1,4 @@
 module CheckImage
-
   private
 
   def check_img
@@ -7,5 +6,4 @@ module CheckImage
       errors.add(:img_src, ':there is no such image')
     end
   end
-
 end

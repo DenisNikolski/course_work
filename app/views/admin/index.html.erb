@@ -151,6 +151,7 @@
                 </tr>
               </table>
               <% shopping_cart = ShoppingCart.find(order.id) %>
+              <div>Date: <%= shopping_cart.updated_at.nil? ? shopping_cart.updated_at : shopping_cart.created_at %></div>
               <span>Order status</span>
               <%= form_for(shopping_cart, :html => {:method => :patch}) do |f| %>
                 <%= f.select :status, ['In processing', 'Paid', 'Delivered'], value: order.status %>
