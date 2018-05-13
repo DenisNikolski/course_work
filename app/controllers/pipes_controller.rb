@@ -5,7 +5,7 @@ class PipesController < ApplicationController
       @pipe = Pipe.new
       @pipe_descr = PipeDescr.new
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -37,7 +37,7 @@ class PipesController < ApplicationController
       @category_id = Category.find_by_name('Pipes').id
       @pipe = Pipe.find(params[:id])
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -49,7 +49,7 @@ class PipesController < ApplicationController
       flash[:notice] = 'Pipe is removed'
       redirect_to categories_path
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -84,7 +84,7 @@ class PipesController < ApplicationController
       end
       redirect_to admin_path, notice: notice
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end

@@ -5,7 +5,7 @@ class RadiatorsController < ApplicationController
       @radiator = Radiator.new
       @radiator_descr = RadiatorDescr.new
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -37,7 +37,7 @@ class RadiatorsController < ApplicationController
       @category_id = Category.find_by_name('Radiators').id
       @radiator = Radiator.find(params[:id])
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -49,7 +49,7 @@ class RadiatorsController < ApplicationController
       flash[:notice] = 'Radiator is removed'
       redirect_to categories_path
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -84,7 +84,7 @@ class RadiatorsController < ApplicationController
       end
       redirect_to admin_path, notice: notice
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end

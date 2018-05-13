@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
     if admin_signed_in?
       @category = Category.new
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end

@@ -5,7 +5,7 @@ class ValvesController < ApplicationController
       @valve = Valve.new
       @valve_descr = ValveDescr.new
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -38,7 +38,7 @@ class ValvesController < ApplicationController
       @category_id = Category.find_by_name('Valves').id
       @valve = Valve.find(params[:id])
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -50,7 +50,7 @@ class ValvesController < ApplicationController
       flash[:notice] = 'Valve is removed'
       redirect_to categories_path
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
@@ -85,7 +85,7 @@ class ValvesController < ApplicationController
       end
       redirect_to admin_path, notice: notice
     else
-      flash[:alert] = 'You need to authorise'
+      flash[:alert] = 'Access is denied'
       redirect_to root_path
     end
   end
