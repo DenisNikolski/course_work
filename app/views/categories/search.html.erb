@@ -1,0 +1,53 @@
+<div id="index">
+  <h1>Search result</h1>
+  <% if @pipes.records.empty? and @valves.records.empty? and @radiators.records.empty? %>
+    <h2>Nothing is found</h2>
+  <% else %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <% @pipes.each_slice(4) do |pipes_row| %>
+            <% pipes_row.each do |pipe| %>
+              <div class="card">
+                <%= link_to pipe_path(pipe), class: 'card-img-top' do %>
+                  <%= image_tag pipe.img_src, alt: 'pipe', class: 'card-img-top' %>
+                  <div class="middle">
+                    <div class="text">Read more</div>
+                  </div>
+                <% end %>
+                <h5 class='card-title'><%= pipe.title %></h5>
+              </div>
+            <% end %>
+          <% end %>
+          <% @radiators.each_slice(4) do |radiators_row| %>
+            <% radiators_row.each do |radiator| %>
+              <div class="card">
+                <%= link_to radiator_path(radiator), class: 'card-img-top' do %>
+                  <%= image_tag radiator.img_src, alt: 'pipe', class: 'card-img-top' %>
+                  <div class="middle">
+                    <div class="text">Read more</div>
+                  </div>
+                <% end %>
+                <h5 class='card-title'><%= radiator.title %></h5>
+              </div>
+            <% end %>
+          <% end %>
+          <% @valves.each_slice(4) do |valves_row| %>
+            <% valves_row.each do |valve| %>
+              <div class="card">
+                <%= link_to valf_path(valve), class: 'card-img-top' do %>
+                  <%= image_tag valve.img_src, alt: 'pipe', class: 'card-img-top' %>
+                  <div class="middle">
+                    <div class="text">Read more</div>
+                  </div>
+                <% end %>
+                <h5 class='card-title'><%= valve.title %></h5>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  <% end %>

@@ -54,7 +54,7 @@
                 <td><%= descr.length %></td>
                 <td><%= descr.weight %></td>
                 <td><%= descr.price.to_s.concat('$') %></td>
-                <td><%= button_to 'Add co cart',
+                <td><%= button_to 'Add to cart',
                                   shopping_cart_item_path(
                                       category_id: '3', product_id: @radiator.id, product_item_id: descr.id,
                                       price: descr.price, amount: 1),

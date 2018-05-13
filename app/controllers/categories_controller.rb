@@ -53,6 +53,13 @@ class CategoriesController < ApplicationController
                 end
   end
 
+  def search
+    search = params[:search]
+    @pipes = Pipe.where('title like ?', "%#{search}%")
+    @valves = Valve.where('title like ?', "%#{search}%")
+    @radiators = Radiator.where('title like ?', "%#{search}%")
+  end
+
   private
 
   def category_params
