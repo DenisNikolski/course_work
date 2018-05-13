@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'about#index'
   get 'admin' => 'admin#index'
+  get 'admin/download_file_carts'
   root 'categories#index'
   devise_for :admin
   get 'admin_new', to: 'admin#new_admin'

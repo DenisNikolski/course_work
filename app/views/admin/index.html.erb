@@ -100,11 +100,15 @@
     <table class="table table-striped">
       <tr>
         <th>Email</th>
+        <th>Sing in count</th>
+        <th>Last sign in at</th>
         <th>Delete</th>
       </tr>
       <% @admin.each do |admin| %>
         <tr>
           <td><%= admin.email %></td>
+          <td><%= admin.sign_in_count %></td>
+          <td><%= admin.last_sign_in_at %></td>
           <td><%= link_to 'delete', destroy_admin_url(admin), :method => :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>
@@ -130,6 +134,8 @@
       <div class="col-9">
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <h3>Export orders in file</h3>
+            <%= link_to 'Download orders', admin_download_file_carts_path, method: :get, class: 'btn btn-success' %>
             <h3>Orders by day</h3>
             <%= line_chart ShoppingCart.group_by_day(:created_at).count %>
             <h3>Orders by Product</h3>
